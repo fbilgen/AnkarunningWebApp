@@ -15,17 +15,27 @@ namespace AnkarunningWebApp.Controllers
             return View();
         }
 
-        public IActionResult About()
+        public IActionResult Trainings()
         {
             ViewData["Message"] = "Your application description page.";
 
             return View();
         }
 
-        public IActionResult Contact()
+        public IActionResult Events()
         {
             ViewData["Message"] = "Your contact page.";
 
+            return View();
+        }
+
+        public IActionResult Profiles() {
+            ViewData["Message"] = "Your Profiles page.";
+            return View();
+        }
+
+        public IActionResult Photos() {
+            ViewData["Message"] = "Your photos description page.";
             return View();
         }
 
