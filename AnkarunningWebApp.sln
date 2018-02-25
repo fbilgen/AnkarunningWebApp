@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2027
+VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnkarunningWebApp", "AnkarunningWebApp\AnkarunningWebApp.csproj", "{8D07D66C-711C-43CB-B9FA-E8A9E2588D18}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ankarunning.Web", "Ankarunning.Web\Ankarunning.Web.csproj", "{205DC37D-70E1-4169-BC51-DEE1E51C8E50}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ankarunning.Service", "Ankarunning.Service\Ankarunning.Service.csproj", "{731DAEF6-7755-4DFE-A120-C6B38DD1674B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ankarunning.Data", "Ankarunning.Data\Ankarunning.Data.csproj", "{983D6F38-DF4A-4FAA-8B65-91E56580C3D1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +15,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8D07D66C-711C-43CB-B9FA-E8A9E2588D18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8D07D66C-711C-43CB-B9FA-E8A9E2588D18}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8D07D66C-711C-43CB-B9FA-E8A9E2588D18}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8D07D66C-711C-43CB-B9FA-E8A9E2588D18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{205DC37D-70E1-4169-BC51-DEE1E51C8E50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{205DC37D-70E1-4169-BC51-DEE1E51C8E50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{205DC37D-70E1-4169-BC51-DEE1E51C8E50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{205DC37D-70E1-4169-BC51-DEE1E51C8E50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{731DAEF6-7755-4DFE-A120-C6B38DD1674B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{731DAEF6-7755-4DFE-A120-C6B38DD1674B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{731DAEF6-7755-4DFE-A120-C6B38DD1674B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{731DAEF6-7755-4DFE-A120-C6B38DD1674B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{983D6F38-DF4A-4FAA-8B65-91E56580C3D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{983D6F38-DF4A-4FAA-8B65-91E56580C3D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{983D6F38-DF4A-4FAA-8B65-91E56580C3D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{983D6F38-DF4A-4FAA-8B65-91E56580C3D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

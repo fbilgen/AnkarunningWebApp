@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Trainings";
+}
+
+@model TrainingViewModel
+
+<section class="py-3">
+    <div class="container">
+        <h1 class="jumbotron-heading">@ViewData["Title"]</h1>
+        <p class="lead text-muted">Add new training</p>
+    </div>
+</section>
+
+<div class="album py-5 bg-light">
+    <div class="container">
+        <form asp-action="Trainings" asp-controller="Home" method="post">
+            <div class="form-group row">
+                <label asp-for="Name" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" asp-for="Name" placeholder="Training Name">
+                </div>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Place" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" asp-for="Place" placeholder="Training Place">
+                </div>
+                <span asp-validation-for="Place" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <label asp-for="DateTime" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-4">
+                    <input type="date" class="form-control" asp-for="DateTime" placeholder="Training Date">
+                </div>
+                <span asp-validation-for="DateTime" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <button type="submit" class="btn btn-default">Log in</button>
+            </div>
+        </form>
+
+    </div>
+</div>
