@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Ankarunning.Data;
 using Microsoft.EntityFrameworkCore;
+using Ankarunning.Service;
 
 namespace Ankarunning.Web
 {
@@ -24,10 +25,22 @@ namespace Ankarunning.Web
         public void ConfigureServices(IServiceCollection services)
         {
             //register context
-            //services.AddDbContext<AnkarunningContext>(options =>
-            //            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<AnkarunningContext>(options =>
+                        options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddMvc();
+
+            //Repository Pattern service registration
+            services.AddScoped(typeof(IAnkarunningRepository<>), typeof(AnkarunningRepository<>));
+            services.AddTransient<ITrainingService<Training>, TrainingService>();
+            services.AddTransient<IPhotoService<TrainingPhoto>, TrainingPhotoService>();
+
+            // Transient: A new instance of the type is used every time the type is requested.
+            // Scoped: A new instance of the type is created the first time it’s requested within a given HTTP request, 
+            // and then re-used for all subsequent types resolved during that HTTP request.
+            // Singleton: A single instance of the type is created once, and used by all subsequent requests for that type
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

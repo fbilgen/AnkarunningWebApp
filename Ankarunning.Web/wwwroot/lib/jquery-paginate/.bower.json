@@ -1,0 +1,37 @@
+{
+  "name": "jquery-paginate",
+  "authors": [
+    "Daniel Herzog <info@danielherzog.es>"
+  ],
+  "description": "jQuery pagination plugin for tables",
+  "main": "jquery-paginate.js",
+  "keywords": [
+    "jquery",
+    "paginate",
+    "table",
+    "client",
+    "front-end"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/wikiti/jquery-paginate",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~1.12.4"
+  },
+  "version": "1.0.1",
+  "_release": "1.0.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.0.1",
+    "commit": "0c34362f9d5e396a02c5e2c7c656ad53f426aaaf"
+  },
+  "_source": "http://gitlab.com/wikiti-random-stuff/jquery-paginate.git",
+  "_target": "1.0.1",
+  "_originalSource": "jquery-paginate"
+}

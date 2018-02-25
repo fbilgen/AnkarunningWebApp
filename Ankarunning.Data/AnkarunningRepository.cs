@@ -13,7 +13,7 @@ namespace Ankarunning.Data {
         //DI of context
         public AnkarunningRepository(AnkarunningContext context) {
             _context = context;
-            _entities = _context.Set<T>();
+            _entities = context.Set<T>();
         }
         public IQueryable<T> GetAll() {
             return _entities.AsQueryable();

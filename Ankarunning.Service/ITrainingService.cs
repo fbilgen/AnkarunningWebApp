@@ -8,9 +8,9 @@ namespace Ankarunning.Service
 {
     public interface ITrainingService<T> where T : Training
     {
-        IQueryable<Training> GetAllTrainings();
-        Training GetTrainingWithId(long id);
-        long InsertTraining(Training entity);
+        IQueryable<T> GetAllTrainings();
+        T GetTrainingWithId(long id);
+        long InsertTraining(T entity);
         void UpdateTraining(T entity);
         void DeleteTraining(T entity);
         void SaveTrainingChanges();
