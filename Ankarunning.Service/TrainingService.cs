@@ -16,7 +16,7 @@ namespace Ankarunning.Service
            return _ankarunningRepository.GetAll();
         }
 
-        public Training GetTrainingWithId(long id) {
+        public IQueryable<Training> GetTrainingWithId(long id) {
             return _ankarunningRepository.Get(id);
         }
 

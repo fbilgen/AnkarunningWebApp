@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.EntityFrameworkCore.Storage.Internal;
 using System;
 
 namespace Ankarunning.Data.Migrations
@@ -30,15 +32,18 @@ namespace Ankarunning.Data.Migrations
                     b.Property<string>("Description")
                         .IsRequired();
 
-                    b.Property<DateTime>("ModifiedDate");
+                    b.Property<short>("Distance");
 
-                    b.Property<string>("Place")
-                        .IsRequired();
+                    b.Property<DateTime>("ModifiedDate");
 
                     b.Property<string>("Title")
                         .IsRequired();
 
+                    b.Property<long>("TrainingPlaceId");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("TrainingPlaceId");
 
                     b.ToTable("Training");
                 });
@@ -66,6 +71,31 @@ namespace Ankarunning.Data.Migrations
                         .IsUnique();
 
                     b.ToTable("TrainingPhoto");
+                });
+
+            modelBuilder.Entity("Ankarunning.Data.TrainingPlace", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("AddedDate");
+
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TrainingPlace");
+                });
+
+            modelBuilder.Entity("Ankarunning.Data.Training", b =>
+                {
+                    b.HasOne("Ankarunning.Data.TrainingPlace", "TrainingPlace")
+                        .WithMany()
+                        .HasForeignKey("TrainingPlaceId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Ankarunning.Data.TrainingPhoto", b =>

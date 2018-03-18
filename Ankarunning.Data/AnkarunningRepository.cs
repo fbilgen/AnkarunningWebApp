@@ -18,8 +18,8 @@ namespace Ankarunning.Data {
         public IQueryable<T> GetAll() {
             return _entities.AsQueryable();
         }
-        public T Get(long id) {
-            return _entities.SingleOrDefault(s => s.Id == id);
+        public IQueryable<T> Get(long id) {
+            return _entities.Where(s => s.Id == id);
         }
 
         public long Insert(T entity) {

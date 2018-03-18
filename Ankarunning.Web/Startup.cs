@@ -26,7 +26,7 @@ namespace Ankarunning.Web
         {
             //register context
             services.AddDbContext<AnkarunningContext>(options =>
-                        options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                        options.UseSqlServer(Configuration.GetConnectionString("ProductionConnection")));
 
             services.AddMvc();
 
@@ -34,13 +34,14 @@ namespace Ankarunning.Web
             services.AddScoped(typeof(IAnkarunningRepository<>), typeof(AnkarunningRepository<>));
             services.AddTransient<ITrainingService<Training>, TrainingService>();
             services.AddTransient<IPhotoService<TrainingPhoto>, TrainingPhotoService>();
+            services.AddTransient<IParameterService<TrainingPlace>, ParameterService>();
 
-            // Transient: A new instance of the type is used every time the type is requested.
-            // Scoped: A new instance of the type is created the first time it’s requested within a given HTTP request, 
-            // and then re-used for all subsequent types resolved during that HTTP request.
-            // Singleton: A single instance of the type is created once, and used by all subsequent requests for that type
+         // Transient: A new instance of the type is used every time the type is requested.
+         // Scoped: A new instance of the type is created the first time it’s requested within a given HTTP request, 
+         // and then re-used for all subsequent types resolved during that HTTP request.
+         // Singleton: A single instance of the type is created once, and used by all subsequent requests for that type
 
-
+         services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,6 +56,9 @@ namespace Ankarunning.Web
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+         app.UseCors(builder =>
+         builder.AllowAnyOrigin());
 
             app.UseStaticFiles();
 

@@ -2,22 +2,25 @@
 
 namespace Ankarunning.Data
 {
-    public class AnkarunningContext : DbContext
-    {
-        public AnkarunningContext(DbContextOptions<AnkarunningContext> options) : base(options) {
+   public class AnkarunningContext : DbContext
+   {
+      public AnkarunningContext(DbContextOptions<AnkarunningContext> options) : base(options)
+      {
 
-        }
+      }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder) {
-            base.OnModelCreating(modelBuilder);
+      protected override void OnModelCreating(ModelBuilder modelBuilder)
+      {
+         base.OnModelCreating(modelBuilder);
 
 
-            #region Training
-            new TrainingMap(modelBuilder.Entity<Training>());
-            new TrainingPhotoMap(modelBuilder.Entity<TrainingPhoto>());
+         #region Training
+         new TrainingMap(modelBuilder.Entity<Training>());
+         new TrainingPhotoMap(modelBuilder.Entity<TrainingPhoto>());
+         new TrainingPlaceMap(modelBuilder.Entity<TrainingPlace>());
 
-            #endregion
+         #endregion
 
-        }
-    }
+      }
+   }
 }

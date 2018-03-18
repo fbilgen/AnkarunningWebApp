@@ -2,10 +2,14 @@
   "name": "asp.net",
   "private": true,
   "dependencies": {
+    "jquery": "3.3.1",
     "bootstrap": "4.0.0",
     "popper.js": "1.12.9",
     "holder.js": "2.9.4",
     "Font-Awesome": "5.0.6",
     "jquery-paginate": "1.0.1"
+  },
+  "resolutions": {
+    "jquery": "3.3.1"
   }
 }

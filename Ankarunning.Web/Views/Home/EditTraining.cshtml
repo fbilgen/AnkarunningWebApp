@@ -17,7 +17,7 @@
             <div class="form-group row">
                 <label asp-for="Id" class="col-sm-2 col-form-label">#</label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control"  readonly asp-for="Id" />
+                    <input type="text" class="form-control" readonly asp-for="Id" />
                 </div>
             </div>
             <div class="form-group row">
@@ -30,15 +30,20 @@
             <div class="form-group row">
                 <label asp-for="Place" class="col-sm-2 col-form-label"></label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control text-capitalize" asp-for="Place">
+                    <select asp-for="PlaceId">
+                        @foreach (var place in ViewBag.Places)
+                        {
+                            <option value="@place.Id">@place.Name</option>
+                        }
+                    </select>
                 </div>
-                <span asp-validation-for="Place" class="text-danger"></span>
+                <span asp-validation-for="PlaceId" class="text-danger"></span>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Date and Time</label>
                 <div class="col-sm-4">
                     <input type="date" class="form-control" asp-for="Date" value="@ViewBag.Date">
-                    <input type="time" class="form-control" asp-for="Time">
+                    <input type="time" class="form-control" asp-for="Time" value="@ViewBag.Time">
                 </div>
                 <span asp-validation-for="Date" class="text-danger"></span>
                 <span asp-validation-for="Time" class="text-danger"></span>
@@ -49,6 +54,13 @@
                     <textarea rows="5" class="form-control" asp-for="Description"></textarea>
                 </div>
                 <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Distance" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-4">
+                    <input type="number" class="form-control" asp-for="Distance">
+                </div>
+                <span asp-validation-for="Distance" class="text-danger"></span>
             </div>
 
             <div class="form-group row">
@@ -65,6 +77,7 @@
                 <label class="col-sm-2 col-form-label"></label>
                 <div class="col-sm-4">
                     <button type="submit" class="btn btn-success"><i class="far fa-save"></i>&nbsp;Update</button>
+                    <a href="/Home/Trainings" type="button" class="btn btn-light"><i class="fas fa-ban"></i>&nbsp;Cancel</a>
                 </div>
             </div>
         </form>

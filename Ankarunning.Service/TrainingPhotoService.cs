@@ -27,7 +27,7 @@ namespace Ankarunning.Service
             return _ankarunningRepository.GetAll().Where(e => e.TrainingId == id).FirstOrDefault();
         }
 
-        public TrainingPhoto GetPhotoWithId(long id) {
+        public IQueryable<TrainingPhoto> GetPhotoWithId(long id) {
           return _ankarunningRepository.Get(id);
         }
 
