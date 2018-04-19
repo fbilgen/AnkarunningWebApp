@@ -12,8 +12,8 @@ namespace Ankarunning.Web.Models
       public long Id { get; set; }
       [Required]
       public string Title { get; set; }
-      public string Place { get; set; }
-      public long PlaceId { get; set; }
+      public string Route { get; set; }
+      public long RouteId { get; set; }
       [DataType(DataType.Date)]
       [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
       public DateTime Date { get; set; }
@@ -27,7 +27,8 @@ namespace Ankarunning.Web.Models
       public DateTime DateTime { get; set; }
 
       public String Description { get; set; }
-      public Int16 Distance { get; set; }
+      public decimal Distance { get; set; }
+      public string AvgPace { get; set; }
       public IFormFile Photo { get; set; }
 
       public string PhotoName { get; set; }

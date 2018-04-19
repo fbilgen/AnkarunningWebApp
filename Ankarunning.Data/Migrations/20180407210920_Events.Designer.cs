@@ -11,9 +11,10 @@ using System;
 namespace Ankarunning.Data.Migrations
 {
     [DbContext(typeof(AnkarunningContext))]
-    partial class AnkarunningContextModelSnapshot : ModelSnapshot
+    [Migration("20180407210920_Events")]
+    partial class Events
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,9 +28,7 @@ namespace Ankarunning.Data.Migrations
 
                     b.Property<DateTime>("AddedDate");
 
-                    b.Property<DateTime?>("DateTimeEnd");
-
-                    b.Property<DateTime>("DateTimeStart");
+                    b.Property<DateTime>("DateTime");
 
                     b.Property<string>("Description")
                         .IsRequired();
@@ -99,15 +98,6 @@ namespace Ankarunning.Data.Migrations
                     b.Property<DateTime>("ModifiedDate");
 
                     b.Property<string>("Name")
-                        .IsRequired();
-
-                    b.Property<byte[]>("PhotoContent")
-                        .IsRequired();
-
-                    b.Property<string>("PhotoContentType")
-                        .IsRequired();
-
-                    b.Property<string>("PhotoFileName")
                         .IsRequired();
 
                     b.HasKey("Id");

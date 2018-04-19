@@ -1,0 +1,57 @@
+﻿@{
+    ViewData["Title"] = "Routes";
+}
+
+@model List<RouteViewModel>
+
+<section class="py-3">
+    <div class="container">
+        <h1 class="jumbotron-heading">@ViewData["Title"]</h1>
+        <p class="lead text-muted">View/Edit Routes</p>
+    </div>
+</section>
+
+
+<div class="album py-5 bg-light">
+    <div class="container table-responsive-md">
+        <table class="table table-hover" id="routesTable">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Latitude</th>
+                    <th scope="col">Longitude</th>
+                    <th scope="col">Distance</th>
+                    <th scope="col">Route</th>
+                    <th scope="col">Photo</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (RouteViewModel item in Model)
+                {
+
+                <tr>
+                    <th scope="row">@item.Id</th>
+                    <td>@item.Name</td>
+                    <td>@item.Latitude</td>
+                    <td>@item.Longitude</td>
+                    <td>@item.Distance</td>
+                    <td><a href="/Home/DownloadRoute?routeId=@item.Id"> @item.FileName</a></td>
+                    <td><a href="/Home/DownloadRoutePhoto?routeId=@item.Id"> @item.PhotoFileName</a></td>
+                    <td><a href="/Home/EditRoute?routeId=@item.Id" name="btnEdit" class="btn btn-outline-warning"><i class="far fa-edit"></i></a></td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#routesTable').paginate({ limit: 5 });
+    });
+
+
+</script>

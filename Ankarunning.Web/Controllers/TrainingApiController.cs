@@ -17,35 +17,30 @@ namespace Ankarunning.Web.Controllers
       //DI
       private readonly ITrainingService<Training> _trainingService;
       private readonly IPhotoService<TrainingPhoto> _trainingPhotoService;
-      private readonly IParameterService<TrainingPlace> _trainingPlaceService;
+      private readonly IRouteService<Route> _routeService;
       //constructor DI
       public TrainingApiController(
          ITrainingService<Training> trainingService,
          IPhotoService<TrainingPhoto> trainingPhotoService,
-         IParameterService<TrainingPlace> trainingPlaceService)
+         IRouteService<Route> routeService)
       {
          _trainingService = trainingService;
          _trainingPhotoService = trainingPhotoService;
-         _trainingPlaceService = trainingPlaceService;
+         _routeService = routeService;
       }
 
-      // GET: api/trainings
+      // GET: api/training
       [HttpGet]
       public IEnumerable<TrainingViewModel> GetAll()
       {
-         var trainings = _trainingService.GetAllTrainings().Select(e => new TrainingViewModel
+         var trainings = _trainingService.GetAllTrainings().Select(t => new TrainingViewModel
          {
-            Title = e.Title,
-            Place = e.TrainingPlace.Name,
-            Description = e.Description,
-            DateTime = e.DateTime,
-            Distance = e.Distance
-            //TrainingPhoto = new TrainingPhotoViewModel
-            //{
-            //   Name = e.TrainingPhoto.Name,
-            //   Content = Convert.ToBase64String(e.TrainingPhoto.Content),
-            //   ContentType = e.TrainingPhoto.ContentType
-            //}
+            Title = t.Title,
+            Description = t.Description,
+            DateTime = t.DateTime,
+            Route = t.Route.Name,
+            Distance = t.Route.Distance,
+            AvgPace = t.AvgPace
          }).ToList();
 
          return trainings;
@@ -60,11 +55,11 @@ namespace Ankarunning.Web.Controllers
          {
             Id = t.Id,
             Title = t.Title,
-            Place = t.TrainingPlace.Name,
             Description = t.Description,
-            Distance = t.Distance,
-            Date = t.DateTime,
-            Time = t.DateTime,
+            DateTime = t.DateTime,
+            Route = t.Route.Name,
+            Distance = t.Route.Distance,
+            AvgPace = t.AvgPace
          }).FirstOrDefault();
 
          if (twm == null)
@@ -80,20 +75,22 @@ namespace Ankarunning.Web.Controllers
       public TrainingViewModel GetFutureTraining()
       {
          TrainingViewModel ft = _trainingService.GetAllTrainings()
-            .OrderByDescending(e => e.DateTime)
-            .Select(e => new TrainingViewModel
+            .OrderByDescending(t => t.DateTime)
+            .Select(t => new TrainingViewModel
             {
-               Id = e.Id,
-               Title = e.Title,
-               Place = e.TrainingPlace.Name,
-               Description = e.Description,
-               Distance = e.Distance,
-               DateTime = e.DateTime,
+               Id = t.Id,
+               Title = t.Title,
+               Description = t.Description,
+               AvgPace = t.AvgPace,
+               DateTime = t.DateTime,
+               Route = t.Route.Name,
+               Distance = t.Route.Distance,
+               RouteId = t.RouteId, //need this for calling map with this route
                TrainingPhoto = new TrainingPhotoViewModel
                {
-                  Name = e.TrainingPhoto.Name,
-                  Content = Convert.ToBase64String(e.TrainingPhoto.Content),
-                  ContentType = e.TrainingPhoto.ContentType
+                  Name = t.TrainingPhoto.Name,
+                  Content = Convert.ToBase64String(t.TrainingPhoto.Content),
+                  ContentType = t.TrainingPhoto.ContentType
                }
             }).FirstOrDefault();
 

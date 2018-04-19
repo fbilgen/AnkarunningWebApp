@@ -12,29 +12,31 @@ using Ankarunning.Service;
 
 namespace Ankarunning.Web
 {
-    public class Startup
-    {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+   public class Startup
+   {
+      public Startup(IConfiguration configuration)
+      {
+         Configuration = configuration;
+      }
 
-        public IConfiguration Configuration { get; }
+      public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
-            //register context
-            services.AddDbContext<AnkarunningContext>(options =>
-                        options.UseSqlServer(Configuration.GetConnectionString("ProductionConnection")));
+      // This method gets called by the runtime. Use this method to add services to the container.
+      public void ConfigureServices(IServiceCollection services)
+      {
+         //register context
+         services.AddDbContext<AnkarunningContext>(options =>
+                     options.UseSqlServer(Configuration.GetConnectionString("ProductionConnection")));
 
-            services.AddMvc();
+         services.AddMvc();
 
-            //Repository Pattern service registration
-            services.AddScoped(typeof(IAnkarunningRepository<>), typeof(AnkarunningRepository<>));
-            services.AddTransient<ITrainingService<Training>, TrainingService>();
-            services.AddTransient<IPhotoService<TrainingPhoto>, TrainingPhotoService>();
-            services.AddTransient<IParameterService<TrainingPlace>, ParameterService>();
+         //Repository Pattern service registration
+         services.AddScoped(typeof(IAnkarunningRepository<>), typeof(AnkarunningRepository<>));
+         services.AddTransient<ITrainingService<Training>, TrainingService>();
+         services.AddTransient<IPhotoService<TrainingPhoto>, TrainingPhotoService>();
+         services.AddTransient<IEventService<Event>, EventService>();
+         services.AddTransient<IPhotoService<EventPhoto>, EventPhotoService>();
+         services.AddTransient<IRouteService<Route>, RouteService>();
 
          // Transient: A new instance of the type is used every time the type is requested.
          // Scoped: A new instance of the type is created the first time it’s requested within a given HTTP request, 
@@ -42,32 +44,32 @@ namespace Ankarunning.Web
          // Singleton: A single instance of the type is created once, and used by all subsequent requests for that type
 
          services.AddCors();
-        }
+      }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseBrowserLink();
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-            }
+      // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+      public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+      {
+         if (env.IsDevelopment())
+         {
+            app.UseBrowserLink();
+            app.UseDeveloperExceptionPage();
+         }
+         else
+         {
+            app.UseExceptionHandler("/Home/Error");
+         }
 
          app.UseCors(builder =>
          builder.AllowAnyOrigin());
 
-            app.UseStaticFiles();
+         app.UseStaticFiles();
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
-        }
-    }
+         app.UseMvc(routes =>
+         {
+            routes.MapRoute(
+                   name: "default",
+                   template: "{controller=Home}/{action=Index}/{id?}");
+         });
+      }
+   }
 }

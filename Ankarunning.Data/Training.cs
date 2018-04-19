@@ -8,12 +8,12 @@ namespace Ankarunning.Data
    {
       public string Title { get; set; }
       public string Description { get; set; }
-      public long TrainingPlaceId { get; set; }
       public DateTime DateTime { get; set; }
-      public Int16 Distance { get; set; }
+      public string AvgPace { get; set; }
+      public long RouteId { get; set; }
 
       //navigation props
       public virtual TrainingPhoto TrainingPhoto { get; set; }
-      public virtual TrainingPlace TrainingPlace { get; set; }
+      public virtual Route Route { get; set; }
    }
 }

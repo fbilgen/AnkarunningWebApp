@@ -11,9 +11,10 @@ using System;
 namespace Ankarunning.Data.Migrations
 {
     [DbContext(typeof(AnkarunningContext))]
-    partial class AnkarunningContextModelSnapshot : ModelSnapshot
+    [Migration("20180407212734_routepic")]
+    partial class routepic
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,9 +28,7 @@ namespace Ankarunning.Data.Migrations
 
                     b.Property<DateTime>("AddedDate");
 
-                    b.Property<DateTime?>("DateTimeEnd");
-
-                    b.Property<DateTime>("DateTimeStart");
+                    b.Property<DateTime>("DateTime");
 
                     b.Property<string>("Description")
                         .IsRequired();

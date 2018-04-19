@@ -6,38 +6,38 @@ using System.Text;
 
 namespace Ankarunning.Service
 {
-   public class TrainingPhotoService : IPhotoService<TrainingPhoto>
+   public class EventPhotoService : IPhotoService<EventPhoto>
    {
-
-      private IAnkarunningRepository<TrainingPhoto> _ankarunningRepository;
+      private IAnkarunningRepository<EventPhoto> _ankarunningRepository;
 
       //DI of repository to service
-      public TrainingPhotoService(IAnkarunningRepository<TrainingPhoto> ankarunningRepository)
+      public EventPhotoService(IAnkarunningRepository<EventPhoto> ankarunningRepository)
       {
          this._ankarunningRepository = ankarunningRepository;
       }
 
-      public void DeletePhoto(TrainingPhoto entity)
+
+      public void DeletePhoto(EventPhoto entity)
       {
          _ankarunningRepository.Delete(entity);
       }
 
-      public IQueryable<TrainingPhoto> GetAllPhotos()
+      public IQueryable<EventPhoto> GetAllPhotos()
       {
          throw new NotImplementedException();
       }
 
-      public TrainingPhoto GetPhotoWithForeignKey(long id)
+      public EventPhoto GetPhotoWithForeignKey(long id)
       {
-         return _ankarunningRepository.GetAll().Where(e => e.TrainingId == id).FirstOrDefault();
+         return _ankarunningRepository.GetAll().Where(e => e.EventId == id).FirstOrDefault();
       }
 
-      public IQueryable<TrainingPhoto> GetPhotoWithId(long id)
+      public IQueryable<EventPhoto> GetPhotoWithId(long id)
       {
          return _ankarunningRepository.Get(id);
       }
 
-      public long InsertPhoto(TrainingPhoto entity)
+      public long InsertPhoto(EventPhoto entity)
       {
          return _ankarunningRepository.Insert(entity);
       }
@@ -47,7 +47,7 @@ namespace Ankarunning.Service
          _ankarunningRepository.SaveChanges();
       }
 
-      public void UpdatePhoto(TrainingPhoto entity)
+      public void UpdatePhoto(EventPhoto entity)
       {
          throw new NotImplementedException();
       }

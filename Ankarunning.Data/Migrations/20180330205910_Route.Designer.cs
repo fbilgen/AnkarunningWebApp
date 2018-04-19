@@ -11,66 +11,15 @@ using System;
 namespace Ankarunning.Data.Migrations
 {
     [DbContext(typeof(AnkarunningContext))]
-    partial class AnkarunningContextModelSnapshot : ModelSnapshot
+    [Migration("20180330205910_Route")]
+    partial class Route
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.0.1-rtm-125")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("Ankarunning.Data.Event", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("AddedDate");
-
-                    b.Property<DateTime?>("DateTimeEnd");
-
-                    b.Property<DateTime>("DateTimeStart");
-
-                    b.Property<string>("Description")
-                        .IsRequired();
-
-                    b.Property<string>("Location")
-                        .IsRequired();
-
-                    b.Property<DateTime>("ModifiedDate");
-
-                    b.Property<string>("Title")
-                        .IsRequired();
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Event");
-                });
-
-            modelBuilder.Entity("Ankarunning.Data.EventPhoto", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("AddedDate");
-
-                    b.Property<byte[]>("Content");
-
-                    b.Property<string>("ContentType");
-
-                    b.Property<long>("EventId");
-
-                    b.Property<DateTime>("ModifiedDate");
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EventId")
-                        .IsUnique();
-
-                    b.ToTable("EventPhoto");
-                });
 
             modelBuilder.Entity("Ankarunning.Data.Route", b =>
                 {
@@ -85,7 +34,7 @@ namespace Ankarunning.Data.Migrations
                     b.Property<string>("ContentType")
                         .IsRequired();
 
-                    b.Property<decimal>("Distance");
+                    b.Property<short>("Distance");
 
                     b.Property<string>("FileName")
                         .IsRequired();
@@ -93,21 +42,12 @@ namespace Ankarunning.Data.Migrations
                     b.Property<string>("Latitude")
                         .IsRequired();
 
-                    b.Property<string>("Longitude")
+                    b.Property<string>("Longitute")
                         .IsRequired();
 
                     b.Property<DateTime>("ModifiedDate");
 
                     b.Property<string>("Name")
-                        .IsRequired();
-
-                    b.Property<byte[]>("PhotoContent")
-                        .IsRequired();
-
-                    b.Property<string>("PhotoContentType")
-                        .IsRequired();
-
-                    b.Property<string>("PhotoFileName")
                         .IsRequired();
 
                     b.HasKey("Id");
@@ -122,13 +62,12 @@ namespace Ankarunning.Data.Migrations
 
                     b.Property<DateTime>("AddedDate");
 
-                    b.Property<string>("AvgPace")
-                        .IsRequired();
-
                     b.Property<DateTime>("DateTime");
 
                     b.Property<string>("Description")
                         .IsRequired();
+
+                    b.Property<short>("Distance");
 
                     b.Property<DateTime>("ModifiedDate");
 
@@ -167,14 +106,6 @@ namespace Ankarunning.Data.Migrations
                         .IsUnique();
 
                     b.ToTable("TrainingPhoto");
-                });
-
-            modelBuilder.Entity("Ankarunning.Data.EventPhoto", b =>
-                {
-                    b.HasOne("Ankarunning.Data.Event", "Event")
-                        .WithOne("EventPhoto")
-                        .HasForeignKey("Ankarunning.Data.EventPhoto", "EventId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Ankarunning.Data.Training", b =>

@@ -1,19 +1,19 @@
 ﻿@{
-    ViewData["Title"] = "Edit Training";
+    ViewData["Title"] = "Edit Event";
 }
 
-@model TrainingViewModel
+@model EventViewModel
 
 <section class="py-3">
     <div class="container">
         <h1 class="jumbotron-heading">@ViewData["Title"]</h1>
-        <p class="lead text-muted">Edit a training</p>
+        <p class="lead text-muted">Edit an Event</p>
     </div>
 </section>
 
 <div class="album py-5 bg-light">
     <div class="container">
-        <form asp-action="EditTraining" asp-controller="Home" method="post" enctype="multipart/form-data">
+        <form asp-action="EditEvent" asp-controller="Home" method="post" enctype="multipart/form-data">
             <div class="form-group row">
                 <label asp-for="Id" class="col-sm-2 col-form-label">#</label>
                 <div class="col-sm-4">
@@ -28,25 +28,25 @@
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="form-group row">
-                <label asp-for="Route" class="col-sm-2 col-form-label"></label>
+                <label asp-for="Location" class="col-sm-2 col-form-label"></label>
                 <div class="col-sm-4">
-                    <select asp-for="RouteId">
-                        @foreach (var route in ViewBag.Routes)
-                {
-                    <option value="@route.Id">@route.Name</option>
-        }
-                    </select>
+                    <input type="text" class="form-control" asp-for="Location" />
                 </div>
-                <span asp-validation-for="RouteId" class="text-danger"></span>
+                <span asp-validation-for="Location" class="text-danger"></span>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Date and Time</label>
+                <label class="col-sm-2 col-form-label">Start Date</label>
                 <div class="col-sm-4">
-                    <input type="date" class="form-control" asp-for="Date" value="@ViewBag.Date">
-                    <input type="time" class="form-control" asp-for="Time" value="@ViewBag.Time">
+                    <input type="date" class="form-control" asp-for="DateStart" value="@ViewBag.DateStart">
                 </div>
-                <span asp-validation-for="Date" class="text-danger"></span>
-                <span asp-validation-for="Time" class="text-danger"></span>
+                <span asp-validation-for="DateStart" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">End Date</label>
+                <div class="col-sm-4">
+                    <input type="date" class="form-control" asp-for="DateEnd" value="@ViewBag.DateEnd">
+                </div>
+                <span asp-validation-for="DateEnd" class="text-danger"></span>
             </div>
             <div class="form-group row">
                 <label asp-for="Description" class="col-sm-2 col-form-label"></label>
@@ -55,14 +55,6 @@
                 </div>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
-            <div class="form-group row">
-                <label asp-for="AvgPace" class="col-sm-2 col-form-label"></label>
-                <div class="col-sm-4">
-                    <input type="text" class="form-control" asp-for="AvgPace" />
-                </div>
-                <span asp-validation-for="AvgPace" class="text-danger"></span>
-            </div>
-
             <div class="form-group row">
                 <label asp-for="Photo" class="col-sm-2 col-form-label"></label>
                 <div class="col-sm-4">
@@ -76,7 +68,7 @@
                 <label class="col-sm-2 col-form-label"></label>
                 <div class="col-sm-4">
                     <button type="submit" class="btn btn-success"><i class="far fa-save"></i>&nbsp;Update</button>
-                    <a href="/Home/Trainings" type="button" class="btn btn-light"><i class="fas fa-ban"></i>&nbsp;Cancel</a>
+                    <a href="/Home/Events" type="button" class="btn btn-light"><i class="fas fa-ban"></i>&nbsp;Cancel</a>
                 </div>
             </div>
         </form>

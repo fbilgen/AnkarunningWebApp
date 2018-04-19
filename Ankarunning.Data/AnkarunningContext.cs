@@ -17,7 +17,9 @@ namespace Ankarunning.Data
          #region Training
          new TrainingMap(modelBuilder.Entity<Training>());
          new TrainingPhotoMap(modelBuilder.Entity<TrainingPhoto>());
-         new TrainingPlaceMap(modelBuilder.Entity<TrainingPlace>());
+         new RouteMap(modelBuilder.Entity<Route>());
+         new EventMap(modelBuilder.Entity<Event>());
+         new EventPhotoMap(modelBuilder.Entity<EventPhoto>());
 
          #endregion
 

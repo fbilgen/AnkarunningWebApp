@@ -11,9 +11,10 @@ using System;
 namespace Ankarunning.Data.Migrations
 {
     [DbContext(typeof(AnkarunningContext))]
-    partial class AnkarunningContextModelSnapshot : ModelSnapshot
+    [Migration("20180407221316_dateendevent")]
+    partial class dateendevent
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
