@@ -11,6 +11,7 @@ using System.Globalization;
 using Ankarunning.Web.Helpers;
 using Microsoft.AspNetCore.Http;
 using System.IO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Ankarunning.Web.Controllers
 {
@@ -43,6 +44,7 @@ namespace Ankarunning.Web.Controllers
 
 
       #region Training
+      [Authorize]
       public IActionResult Trainings()
       {
          //read all trainings so far and send to the page

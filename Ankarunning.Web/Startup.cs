@@ -10,6 +10,11 @@ using Ankarunning.Data;
 using Microsoft.EntityFrameworkCore;
 using Ankarunning.Service;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.Extensions.Options;
+using System.Security.Claims;
+using Newtonsoft.Json;
+using Microsoft.AspNetCore.Http;
 
 namespace Ankarunning.Web
 {
@@ -31,13 +36,64 @@ namespace Ankarunning.Web
 
 
          // Add authentication services
-         services.AddAuthentication(
-             options => options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme);
+         services.AddAuthentication(options =>
+         {
+            options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+         })
+         .AddCookie()
+         .AddOpenIdConnect(options =>
+         {
+            options.Authority = $"https://{Configuration["Auth0:Domain"]}/";
+            options.ClientId = Configuration["Auth0:ClientId"];
+            options.ClientSecret = Configuration["Auth0:ClientSecret"];
+            options.ResponseType = "code";
+            options.CallbackPath = new PathString("/Home");
+            options.ClaimsIssuer = "Auth0";
+            options.Events = new OpenIdConnectEvents
+            {
+
+               OnRedirectToIdentityProviderForSignOut = context =>
+               {
+                  context.Response.Redirect(options.Authority + "/v2/logout?client_id=" + options.ClientId + "&returnTo={context.Request.Scheme}://{context.Request.Host}/");
+                  context.HandleResponse();
+
+                  return Task.FromResult(0);
+               },
+               OnTicketReceived = context =>
+               {
+                  var opts = context.Options as OpenIdConnectOptions;
+
+                  // Get the ClaimsIdentity
+                  if (context.Principal.Identity is ClaimsIdentity identity)
+                  {
+                     // Add the Name ClaimType. This is required if we want User.Identity.Name to actually return something!
+                     if (!context.Principal.HasClaim(c => c.Type == ClaimTypes.Name) &&
+                         identity.HasClaim(c => c.Type == "name"))
+                        identity.AddClaim(new Claim(ClaimTypes.Name, identity.FindFirst("name").Value, ClaimValueTypes.String, opts.Authority));
+
+                     // Add the groups as roles
+                     var authzClaim = context.Principal.FindFirst(c => c.Type == "authorization");
+                     if (authzClaim != null)
+                     {
+                        var authorization = JsonConvert.DeserializeObject<Auth0Authorization>(authzClaim.Value);
+                        if (authorization != null)
+                        {
+                           foreach (var group in authorization.Groups)
+                           {
+                              identity.AddClaim(new Claim(ClaimTypes.Role, group, ClaimValueTypes.String, opts.Authority));
+                           }
+                        }
+                     }
+                  }
+
+                  return Task.FromResult(0);
+               }
+            };
+         });
 
          services.AddMvc();
 
-         // Add functionality to inject IOptions<T>
-         services.AddOptions();
 
          //Repository Pattern service registration
          services.AddScoped(typeof(IAnkarunningRepository<>), typeof(AnkarunningRepository<>));
@@ -72,6 +128,8 @@ namespace Ankarunning.Web
          builder.AllowAnyOrigin());
 
          app.UseStaticFiles();
+
+         app.UseAuthentication();
 
          app.UseMvc(routes =>
          {
