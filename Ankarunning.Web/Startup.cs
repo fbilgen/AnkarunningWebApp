@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Ankarunning.Data;
 using Microsoft.EntityFrameworkCore;
 using Ankarunning.Service;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace Ankarunning.Web
 {
@@ -28,7 +29,15 @@ namespace Ankarunning.Web
          services.AddDbContext<AnkarunningContext>(options =>
                      options.UseSqlServer(Configuration.GetConnectionString("ProductionConnection")));
 
+
+         // Add authentication services
+         services.AddAuthentication(
+             options => options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme);
+
          services.AddMvc();
+
+         // Add functionality to inject IOptions<T>
+         services.AddOptions();
 
          //Repository Pattern service registration
          services.AddScoped(typeof(IAnkarunningRepository<>), typeof(AnkarunningRepository<>));
